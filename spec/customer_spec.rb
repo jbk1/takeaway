@@ -1,10 +1,13 @@
 require 'customer'
 
-describe Customer do
-  it 'can place an order ' do
-    customer = Customer.new(restaurant)
-    expect(restaurant).to receive(:order_received).with(customer, 'name', 3)
+	describe Customer do
 
-    customer.place_order(restaurant,'name', 3)    
-  end
-end
+	  it 'can place an order ' do
+	    restaurant1 = Restaurant.new
+	    customer = Customer.new(restaurant1)
+
+	    expect(restaurant1).to receive(:order_received).with(customer, 'name', 3)
+
+	    customer.place_order(customer,'name', 3)    
+		end
+	end

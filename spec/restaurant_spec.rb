@@ -38,9 +38,25 @@ describe Restaurant do
 
 	context 'dealing with customers' do
 
+			# records the order, checks it's valid and calculates total
 		it 'can receive an order from a customer' do
-			# records the order, checks it's valid and calculates total	
+			restaurant1 = Restaurant.new
+			customer1 = Customer.new(restaurant1)
+			expect(restaurant1).to receive(:order_received).with(customer1, 'tea', 2)
+			customer1.place_order(restaurant1, 'tea', 2)
 		end
+
+		it 'returns an error if ordered is not on menu' do
+			restaurant1 = Restaurant.new
+			customer1 = Customer.new(restaurant1)
+			restaurant1.create_dish('coffee', 2)
+			expect(customer1).to receive(:not_on_menu)
+			customer1.place_order(restaurant1, 'tea', 2)
+		end
+
+
+
+
 
 		it 'can add up the total price of an order'
 		

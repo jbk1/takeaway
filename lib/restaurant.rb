@@ -6,6 +6,7 @@ class Restaurant
 
 	def initialize
 		@menu ||= []
+		@orders ||= []
 	end
 
 	def create_dish(name, price)
@@ -29,9 +30,15 @@ class Restaurant
 		sprintf("%0.2f", dish[:price])
 	end
 
-	def order_received
-		
+	def order_received(customer, name, volume)
+		if @menu.any? { |h| h[:name] == name}
+		@orders << [customer, name, volume]
+		else
+			customer.not_on_menu(name)
+		end
 	end
+
+	
 
 
 end

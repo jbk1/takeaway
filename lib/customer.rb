@@ -2,8 +2,8 @@ require_relative 'restaurant'
 
 class Customer
 
-	def initialize(restaurant)
-		@restaurant = restaurant
+	def initialize(restaurant_instance)
+		@restaurant = restaurant_instance
 	end
 
 
@@ -11,5 +11,7 @@ class Customer
 		@restaurant.order_received(self, name, volume)
 	end
 
+	def not_on_menu(name)
+	end
 
 end

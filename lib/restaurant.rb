@@ -30,6 +30,7 @@ class Restaurant
 	end
 
 	def order_received
+		
 	end
 
 

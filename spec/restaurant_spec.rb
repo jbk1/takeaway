@@ -39,10 +39,7 @@ describe Restaurant do
 	context 'dealing with customers' do
 
 		it 'can receive an order from a customer' do
-			customer = Customer.new(restaurant)
-			expect(restaurant).to receive(:order_received).with(customer, 'name', 3)
-
-			customer.place_order(restaurant,'name', 3)	 	
+			# records the order, checks it's valid and calculates total	
 		end
 
 		it 'can add up the total price of an order'

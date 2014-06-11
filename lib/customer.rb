@@ -12,6 +12,7 @@ class Customer
 	end
 
 	def not_on_menu(name)
+		puts "sorry #{name} not on menu"
 	end
 
 end

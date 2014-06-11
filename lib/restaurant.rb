@@ -3,6 +3,7 @@ require_relative 'customer'
 class Restaurant
 
 	attr_accessor :menu
+	attr_accessor :orders
 
 	def initialize
 		@menu ||= []
@@ -32,10 +33,20 @@ class Restaurant
 
 	def order_received(customer, name, volume)
 		if @menu.any? { |h| h[:name] == name}
-		@orders << [customer, name, volume]
+		@orders << {customer: customer, name: name, volume: volume}
 		else
 			customer.not_on_menu(name)
 		end
+	end
+
+	def print_orders
+		puts @orders   
+	end
+
+
+	def customer_order_total(customer)
+		@orders.any?
+		# searches @orders varaible array for customer, then calcs the dish names, volumes and unit prices of said order and returns them.
 	end
 
 	

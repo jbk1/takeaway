@@ -54,11 +54,16 @@ describe Restaurant do
 			customer1.place_order(restaurant1, 'tea', 2)
 		end
 
+		it 'can add up the total price of an order' do
+			restaurant1 = Restaurant.new
+			customer1 = Customer.new(restaurant1)
+			restaurant1.create_dish('coffee', 2)
+			restaurant1.create_dish('tea', 2)
+			customer1.place_order(restaurant1, 'tea', 2)
+			customer1.place_order(restaurant1, 'coffee', 2)
+			expect(restaurant1.customer_order_total(customer1)). to eq 4
+		end
 
-
-
-
-		it 'can add up the total price of an order'
 		
 
 		it 'can tell a customer about an order'

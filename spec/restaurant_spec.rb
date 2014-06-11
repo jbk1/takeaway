@@ -1,4 +1,5 @@
 require 'restaurant'
+require 'customer'
 
 describe Restaurant do
 	
@@ -11,7 +12,7 @@ describe Restaurant do
 		expect(restaurant.menu).to eq [{name: 'Fish & chips', price: 7.00}]
 		end
 
-		it 'has a menu with multiple dises' do
+		it 'has a menu with multiple dishes' do
 			restaurant.create_dish('Roast beef', 15.00)
 			restaurant.create_dish('Shepherds pie', 10.00)
 			restaurant.create_dish('Cornish pastie', 8.00)
@@ -32,21 +33,23 @@ describe Restaurant do
 			message = "Roast beef : £15.00\nShepherds pie : £10.00\nCornish pastie : £8.00"
 
 			expect(restaurant.menu_contents).to eq message
+		end
+	end
 
+	context 'dealing with customers' do
+
+		it 'can receive an order from a customer' do
+			customer = Customer.new(restaurant)
+			expect(restaurant).to receive(:order_received).with(customer, 'name', 3)
+
+			customer.place_order(restaurant,'name', 3)	 	
 		end
 
-		xit 'can receive an order from a customer' do
-		 customer = C
-		end
+		it 'can add up the total price of an order'
+		
 
-		xit 'can add up the total price of an order' do
-		end
-
-		xit 'can tell a customer about an order' do
-		end
-
-
-
+		it 'can tell a customer about an order'
+	
 
 	end
 end

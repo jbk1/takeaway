@@ -1,3 +1,4 @@
+require_relative 'customer'
 
 class Restaurant
 
@@ -23,8 +24,14 @@ class Restaurant
 		menu.map { |dish| "#{dish[:name]} : £#{price_for(dish)}" }.join("\n")
 	end
 
+# when running this method alone, error 'no implicit conversion of symbol to integer'
 	def price_for(dish)
 		sprintf("%0.2f", dish[:price])
 	end
+
+	def order_received
+	end
+
+
 end
 

@@ -1,5 +1,5 @@
-require 'restaurant'
-require 'customer'
+require './lib/restaurant'
+require './lib/customer'
 
 restaurant = Restaurant.new
 customer = Customer.new

@@ -3,20 +3,22 @@ require 'customer'
 
 describe Restaurant do
 	
-	 let(:restaurant) {Restaurant.new} 
+	let(:restaurant) {Restaurant.new} 
 
 	context 'has a menu of dishes' do
 
 		it "has a menu with a dish with two key values, name and price" do
-		restaurant.create_dish('Fish & chips', 7.00)
-		expect(restaurant.menu).to eq [{name: 'Fish & chips', price: 7.00}]
+		  restaurant.create_dish('Fish & chips', 7.00)
+		  expect(restaurant.menu).to eq [{name: 'Fish & chips', price: 7.00}]
 		end
 
 		it 'has a menu with multiple dishes' do
 			restaurant.create_dish('Roast beef', 15.00)
 			restaurant.create_dish('Shepherds pie', 10.00)
 			restaurant.create_dish('Cornish pastie', 8.00)
-			expect(restaurant.menu).to eq [{name: 'Roast beef', price: 15.00}, {name: 'Shepherds pie', price: 10.00}, {name: 'Cornish pastie', price: 8.00}]
+			expect(restaurant.menu).to include({name: 'Roast beef', price: 15.00})
+			expect(restaurant.menu).to include({name: 'Shepherds pie', price: 10.00})
+			expect(restaurant.menu).to include({name: 'Cornish pastie', price: 8.00})
 		end
 
 		it 'can delete dishes from the menu' do
@@ -26,7 +28,7 @@ describe Restaurant do
 			expect(restaurant.menu).to eq [{name: 'Shepherds pie', price: 10.00}]
 		end
 
-		it 'can print a menu' do
+		it 'list of dishes with prices' do
 			restaurant.create_dish('Roast beef', 15.00)
 			restaurant.create_dish('Shepherds pie', 10.00)
 			restaurant.create_dish('Cornish pastie', 8.00)
@@ -68,6 +70,16 @@ describe Restaurant do
 		
 
 		it 'can tell a customer about an order'
+
+		it 'place order by giving the list of dishes, their quantities, and a number that should be the exact total' do 
+
+      expect { place_order(['tea',2,'coffee',3],0) }.to raise_error
+
+      customer1.place_order(restaurant1, 'coffee', 2)
+      expect { customer1.expected_order_total(0) }.to raise_error
+
+      #def place_order(list, total)
+		end
 	
 
 	end

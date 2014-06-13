@@ -38,7 +38,8 @@ describe Restaurant do
 
 	context 'dealing with customers' do
 
-			# records the order, checks it's valid and calculates total
+			# records the order, checks ordered item is present and calculates total.
+			
 		it 'can receive an order from a customer' do
 			restaurant1 = Restaurant.new
 			customer1 = Customer.new(restaurant1)

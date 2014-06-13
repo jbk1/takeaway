@@ -47,6 +47,7 @@ class Restaurant
 	def customer_order_total(customer)
 		@orders.any?
 		# searches @orders varaible array for customer, then calcs the dish names, volumes and unit prices of said order and returns them.
+
 	end
 
 	

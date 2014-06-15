@@ -25,6 +25,7 @@ class Restaurant
 		print menu_contents
 	end
 
+# How would we get a nicely formatted output, with not customer ID's but the variable names' they're assigned to?
 	def display_order_contents
 		@orders.each {|item| print item, " -- "}
 	end
@@ -51,6 +52,8 @@ class Restaurant
 
  	def customer_order_items(customer)
  		order = @orders.select {|o| o[:customer] == customer}
+ 		# order.each {|item| print item[][:name]}
+ 		# trying to do the above to better format the print out, but runs error 'args 0 for 1'????
  	end
 
 	def customer_order_total(customer)
@@ -62,7 +65,13 @@ class Restaurant
 	end
 
  	def confirm_order(customer)
- 		print customer_order_items(customer)
- 		customer_order_total(customer)
+ 		order_items = customer_order_items(customer)
+ 		form_order_items = 
+ 		order_items.map { |dish| "#{dish[:name]} : x#{dish[:volume]}" }
+ 		puts "We are confirming your order, it contains these items:#{form_order_items}"
+ 		total_bill = customer_order_total(customer)
+ 		print "total bill: £#{total_bill}"
+ 		
+
 		end
 	end

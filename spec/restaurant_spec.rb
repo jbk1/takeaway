@@ -86,8 +86,9 @@ describe Restaurant do
 			customer1.place_order(restaurant1, 'tea', 2)
 			customer1.place_order(restaurant1, 'tea', 2)
 
-		expect(customer).to receive(:duplicate_order_warning)
+			expect(customer).to receive(:duplicate_order_warning)
 		end
+
 
 
 

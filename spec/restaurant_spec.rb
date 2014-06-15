@@ -44,14 +44,25 @@ describe Restaurant do
 			
 		it 'can receive an order from a customer' do
 			restaurant1 = Restaurant.new
-			customer1 = Customer.new(restaurant1)
+			customer1 = Customer.new
 			expect(restaurant1).to receive(:order_received).with(customer1, 'tea', 2)
 			customer1.place_order(restaurant1, 'tea', 2)
 		end
 
+		it 'can receive multiple orders from a customer' do
+			restaurant1 = Restaurant.new
+			customer1 = Customer.new
+			restaurant1.create_dish('coffee', 2)
+			restaurant1.create_dish('tea', 2)
+			customer1.place_order(restaurant1, 'tea', 2)
+			customer1.place_order(restaurant1, 'coffee', 3)
+
+			expect(restaurant1.orders).to eq([{customer: customer1, name: 'tea', volume: 2},{customer: customer1, name: 'coffee', volume: 3}])
+		end
+
 		it 'returns an error if ordered is not on menu' do
 			restaurant1 = Restaurant.new
-			customer1 = Customer.new(restaurant1)
+			customer1 = Customer.new
 			restaurant1.create_dish('coffee', 2)
 			expect(customer1).to receive(:not_on_menu)
 			customer1.place_order(restaurant1, 'tea', 2)
@@ -59,28 +70,22 @@ describe Restaurant do
 
 		it 'can add up the total price of an order' do
 			restaurant1 = Restaurant.new
-			customer1 = Customer.new(restaurant1)
+			customer1 = Customer.new
 			restaurant1.create_dish('coffee', 2)
 			restaurant1.create_dish('tea', 2)
 			customer1.place_order(restaurant1, 'tea', 2)
 			customer1.place_order(restaurant1, 'coffee', 2)
-			expect(restaurant1.customer_order_total(customer1)). to eq 4
-		end
+			expect(restaurant1.customer_order_total(customer1)). to eq 8
+		end		
 
-		
 
-		it 'can tell a customer about an order'
 
-		it 'place order by giving the list of dishes, their quantities, and a number that should be the exact total' do 
 
-      expect { place_order(['tea',2,'coffee',3],0) }.to raise_error
 
-      customer1.place_order(restaurant1, 'coffee', 2)
-      expect { customer1.expected_order_total(0) }.to raise_error
 
-      #def place_order(list, total)
-		end
-	
+# what about an order with 0 as volume raising an error?
+		it 'confirm order by giving the list of dishes, their quantities, and the total price'
+
 
 	end
 end

@@ -10,6 +10,7 @@ class Restaurant
 		@orders = []
 	end
 
+# allows you to create duplicate dishes! need to write a map and if not present addition here.
 	def create_dish(name, price)
 		menu << {name: name, price: price}
 	end
@@ -24,11 +25,14 @@ class Restaurant
 		print menu_contents
 	end
 
+	def display_order_contents
+		@orders.each {|item| print item, " -- "}
+	end
+
 	def menu_contents
 		menu.map { |dish| "#{dish[:name]} : £#{price_for(dish)}" }.join("\n")
 	end
 
-# when running this method alone, error 'no implicit conversion of symbol to integer'
 	def price_for(dish)
 		sprintf("%0.2f", dish[:price])
 	end
@@ -42,23 +46,23 @@ class Restaurant
 	end
 
 	def print_orders
-		puts @orders   
+		@orders   
 	end
 
+ 	def customer_order_items(customer)
+ 		order = @orders.select {|o| o[:customer] == customer}
+ 	end
 
 	def customer_order_total(customer)
-		# searches @orders varaible array for customer, then calcs the dish names, volumes and unit prices of said order and returns them.
-		order = @orders.select {|o| o[:customer] == customer}
-		#[1,2,3,4].inject {|sum,e| sum += e} ==> sum = 1
-		#[{},{}].inject  ==> sum = {} + 2 
-		order.inject(0) do |sum,item|
+		customer_order_items(customer).inject(0) do |sum,item|
 			menu_item = @menu.select {|m| m[:name] == item[:name]}
-			sum += menu_item[0][:price]
+			menu_item_volume = customer_order_items(customer)[0][:volume]
+			sum += (menu_item[0][:price] * menu_item_volume)
 		end
 	end
 
-	
-
-
-end
-
+ 	def confirm_order(customer)
+ 		print customer_order_items(customer)
+ 		customer_order_total(customer)
+		end
+	end

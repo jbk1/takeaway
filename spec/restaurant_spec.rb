@@ -78,13 +78,17 @@ describe Restaurant do
 			expect(restaurant1.customer_order_total(customer1)). to eq 8
 		end		
 
+		xit 'will flag a duplicate order' do
+		restaurant1 = Restaurant.new
+			customer1 = Customer.new
+			restaurant1.create_dish('coffee', 2)
+			restaurant1.create_dish('tea', 2)
+			customer1.place_order(restaurant1, 'tea', 2)
+			customer1.place_order(restaurant1, 'tea', 2)
 
+		expect(customer).to receive(:duplicate_order_warning)
+		end
 
-
-
-
-# what about an order with 0 as volume raising an error?
-		it 'confirm order by giving the list of dishes, their quantities, and the total price'
 
 
 	end
